@@ -9,7 +9,7 @@ import pandas as pd
     "-d",
     "--dataset-path",
     default="data/train.csv",
-    type=click.Path(exists=True, dir_okay=False, path_type=Path)
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
 )
 def train(dataset_path: Path) -> None:
     dataset = pd.read_csv(dataset_path)
