@@ -351,7 +351,7 @@ python-versions = ">=3.5"
 name = "mypy"
 version = "0.950"
 description = "Optional static typing for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -789,7 +789,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "648d0710990151da3fd2343d314f8756d6ce70525d55c239b9a956fcd89041d9"
+content-hash = "b6517612e443d5eef1d5baa87bc6ffcb43554947d99f54ccd554a3b41065f9ad"
 
 [metadata.files]
 alembic = [
