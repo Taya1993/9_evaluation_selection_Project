@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "9_evaluation_selection_Project"
+name = "evaluation_selection_Project"
 version = "0.1.0"
 description = ""
 authors = ["Таисия Титова <melodi63@yandex.ru>"]
 
 [tool.poetry.scripts]
-train = "9_evaluation_selection_project.train:train"
+train = "evaluation_selection_project.train:train"
 
 [tool.poetry.dependencies]
 python = "^3.9"
