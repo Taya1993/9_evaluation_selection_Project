@@ -8,15 +8,25 @@ from sklearn.preprocessing import StandardScaler
 
 
 def create_pipeline_LogisticRegression(
-    use_scaler: bool, max_iter: int, logreg_C: float, use_feature_selection: int, grid_search: bool, random_state: int
+    use_scaler: bool,
+    max_iter: int,
+    logreg_C: float,
+    use_feature_selection: int,
+    grid_search: bool,
+    random_state: int,
 ) -> Pipeline:
     pipeline_steps = []
     if use_scaler:
         pipeline_steps.append(("scaler", StandardScaler()))
     if use_feature_selection == 1:
-        pipeline_steps.append(("feature_selection", SelectFromModel(RandomForestClassifier(random_state=2022))))
+        pipeline_steps.append(
+            (
+                "feature_selection",
+                SelectFromModel(RandomForestClassifier(random_state=2022)),
+            )
+        )
     if use_feature_selection == 2:
-        pipeline_steps.append(("feature_selection", VarianceThreshold(threshold = 0.20)))
+        pipeline_steps.append(("feature_selection", VarianceThreshold(threshold=0.20)))
     if grid_search == False:
         pipeline_steps.append(
             (
@@ -35,21 +45,33 @@ def create_pipeline_LogisticRegression(
         )
     return Pipeline(steps=pipeline_steps)
 
+
 def create_pipeline_RandomForest(
-    use_scaler: bool, n_estimators: int, use_feature_selection: int, grid_search: bool, random_state: int
+    use_scaler: bool,
+    n_estimators: int,
+    use_feature_selection: int,
+    grid_search: bool,
+    random_state: int,
 ) -> Pipeline:
     pipeline_steps = []
     if use_scaler:
         pipeline_steps.append(("scaler", StandardScaler()))
     if use_feature_selection == 1:
-        pipeline_steps.append(("feature_selection", SelectFromModel(RandomForestClassifier(random_state=2022))))
+        pipeline_steps.append(
+            (
+                "feature_selection",
+                SelectFromModel(RandomForestClassifier(random_state=2022)),
+            )
+        )
     if use_feature_selection == 2:
-        pipeline_steps.append(("feature_selection", VarianceThreshold(threshold = 0.20)))
+        pipeline_steps.append(("feature_selection", VarianceThreshold(threshold=0.20)))
     if grid_search == False:
         pipeline_steps.append(
             (
                 "classifier",
-                RandomForestClassifier(n_estimators=n_estimators, random_state=random_state),
+                RandomForestClassifier(
+                    n_estimators=n_estimators, random_state=random_state
+                ),
             )
         )
     if grid_search == True:
