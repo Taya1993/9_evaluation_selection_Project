@@ -5,8 +5,8 @@ import click
 import mlflow
 import mlflow.sklearn
 from sklearn.model_selection import KFold
+from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import cross_val_score
-
 
 from .data import get_dataset
 from .pipeline import create_pipeline_LogisticRegression
@@ -38,6 +38,7 @@ from .pipeline import create_pipeline_RandomForest
 @click.option("--use-feature-selection", default=0, type=int)
 @click.option("--ml-model", default=1, type=int)
 @click.option("--n-estimators", default=100, type=int)
+@click.option("--grid-search", default=False, type=bool)
 
 def train(
     dataset_path: Path,
@@ -50,25 +51,54 @@ def train(
     use_feature_selection: int,
     ml_model: int,
     n_estimators: int,
+    grid_search: bool,
 ) -> None:
     features, target = get_dataset(dataset_path)
 
     with mlflow.start_run():
-        if (ml_model == 1):
-            pipeline = create_pipeline_LogisticRegression(use_scaler, max_iter, logreg_c, use_feature_selection, random_state)
-            mlflow.log_param("max_iter", max_iter)
-            mlflow.log_param("logreg_c", logreg_c)
+        if ml_model == 1:
+            pipeline = create_pipeline_LogisticRegression(use_scaler, max_iter, logreg_c, use_feature_selection, grid_search, random_state)
             mlflow.log_param("ml_model", "LogisticRegression")
-        if (ml_model == 2):
-            pipeline = create_pipeline_RandomForest(use_scaler, n_estimators, use_feature_selection, random_state)
-            mlflow.log_param("n_estimators", n_estimators)
+            if grid_search == False:
+                mlflow.log_param("max_iter", max_iter)
+                mlflow.log_param("logreg_c", logreg_c)               
+        if ml_model == 2:
+            pipeline = create_pipeline_RandomForest(use_scaler, n_estimators, use_feature_selection, grid_search, random_state)
             mlflow.log_param("ml_model", "RandomForestClassifier")
+            if grid_search == False:
+                mlflow.log_param("n_estimators", n_estimators)            
 
-        pipeline.fit(features, target)
+        if grid_search == True and ml_model == 1:       
+            cv_inner = KFold(n_splits=3, shuffle=True, random_state=1)
+            param_grid = {
+                'penalty' : ['l1','l2'], 
+                'C'       : [1, 10, 100],
+                'solver'  : ['newton-cg', 'lbfgs', 'liblinear'],
+                'max_iter': [100, 1000, 1500, 2000],
+            }
+            search = GridSearchCV(pipeline, param_grid=param_grid, n_jobs=1, cv=cv_inner, refit=True)
+
+        if grid_search == True and ml_model == 2:       
+            cv_inner = KFold(n_splits=3, shuffle=True, random_state=1)
+            param_grid = {
+                "classifier__n_estimators": [10, 100, 150, 200],
+                "classifier__max_features": ["auto", "sqrt", "log2"],
+                "classifier__max_depth": [2, 4, 5, 6, None],
+                "classifier__criterion": ["gini", "entropy"],
+            }
+            search = GridSearchCV(pipeline, param_grid=param_grid, n_jobs=1, cv=cv_inner, refit=True)
 
         cv = KFold(n_splits=test_split_ratio, shuffle=True, random_state=random_state)
 
-        f1 = cross_val_score(pipeline, features, target, scoring='f1_weighted', cv=cv, n_jobs = 1).mean()
+        if grid_search == 1:
+            f1 = cross_val_score(search, features, target, scoring='f1_weighted', cv=cv, n_jobs = 1).mean()
+            if ml_model == 1:
+                mlflow.log_param("max_iter", search.best_params_['max_iter'])
+                mlflow.log_param("logreg_c", search.best_params_['C']) 
+            if ml_model == 2:
+                mlflow.log_param("n_estimators", search.best_params_['n_estimators'])         
+        else:
+            f1 = cross_val_score(pipeline, features, target, scoring='f1_weighted', cv=cv, n_jobs = 1).mean()
         
         if use_feature_selection == 0:
              mlflow.log_param("use_feature_selection", "None")
