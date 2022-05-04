@@ -115,11 +115,13 @@ def train(
                 mlflow.log_param("logreg_c", search.best_params_["C"])
             if ml_model == 2:
                 mlflow.log_param("n_estimators", search.best_params_["n_estimators"])
+            search.fit(features, target)
         else:
             f1 = cross_val_score(
                 pipeline, features, target, scoring="f1_weighted", cv=cv, n_jobs=1
             ).mean()
-
+            pipeline.fit(features, target)
+        
         if use_feature_selection == 0:
             mlflow.log_param("use_feature_selection", "None")
         if use_feature_selection == 1:
