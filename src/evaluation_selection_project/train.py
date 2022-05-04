@@ -1,12 +1,12 @@
 from pathlib import Path
-from joblib import dump
+from joblib import dump  # type: ignore
 
 import click
-import mlflow
-import mlflow.sklearn
-from sklearn.model_selection import KFold
-from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import cross_val_score
+import mlflow  # type: ignore
+import mlflow.sklearn  # type: ignore
+from sklearn.model_selection import KFold  # type: ignore
+from sklearn.model_selection import GridSearchCV  # type: ignore
+from sklearn.model_selection import cross_val_score  # type: ignore
 
 from .data import get_dataset
 from .pipeline import create_pipeline_LogisticRegression
@@ -121,7 +121,7 @@ def train(
                 pipeline, features, target, scoring="f1_weighted", cv=cv, n_jobs=1
             ).mean()
             pipeline.fit(features, target)
-        
+
         if use_feature_selection == 0:
             mlflow.log_param("use_feature_selection", "None")
         if use_feature_selection == 1:

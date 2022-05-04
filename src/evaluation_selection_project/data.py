@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Tuple
 
 import click
-import pandas as pd
+import pandas as pd  # type: ignore
 
 
 def get_dataset(csv_path: Path) -> Tuple[pd.DataFrame, pd.DataFrame]:

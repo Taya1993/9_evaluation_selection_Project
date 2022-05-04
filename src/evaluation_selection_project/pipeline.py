@@ -1,8 +1,8 @@
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.feature_selection import SelectFromModel, VarianceThreshold
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression  # type: ignore
+from sklearn.ensemble import RandomForestClassifier  # type: ignore
+from sklearn.feature_selection import SelectFromModel, VarianceThreshold  # type: ignore
+from sklearn.pipeline import Pipeline  # type: ignore
+from sklearn.preprocessing import StandardScaler  # type: ignore
 
 
 def create_pipeline_LogisticRegression(

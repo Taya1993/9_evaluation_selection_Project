@@ -1,6 +1,6 @@
-from click.testing import CliRunner
-import pytest
-from evaluation_selection_project.train import train
+from click.testing import CliRunner  # type: ignore
+import pytest  # type: ignore
+from evaluation_selection_project.train import train  # type: ignore
 
 
 @pytest.fixture
@@ -15,7 +15,7 @@ def test_error_for_invalid_test_split_ratio(runner: CliRunner) -> None:
         train,
         [
             "--test-split-ratio",
-            -1,
+            "-1",
         ],
     )
     assert result.exit_code == 1
@@ -27,9 +27,9 @@ def test_success_for_correct_test_split_ratio(runner: CliRunner) -> None:
         train,
         [
             "--max-iter",
-            1000,
+            "1000",
             "--test-split-ratio",
-            3,
+            "3",
         ],
     )
     assert result.exit_code == 0
