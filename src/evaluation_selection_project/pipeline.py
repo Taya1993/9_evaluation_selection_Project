@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import SelectFromModel, VarianceThreshold
@@ -27,7 +25,7 @@ def create_pipeline_LogisticRegression(
         )
     if use_feature_selection == 2:
         pipeline_steps.append(("feature_selection", VarianceThreshold(threshold=0.20)))
-    if grid_search == False:
+    if grid_search is False:
         pipeline_steps.append(
             (
                 "classifier",
@@ -36,7 +34,7 @@ def create_pipeline_LogisticRegression(
                 ),
             )
         )
-    if grid_search == True:
+    if grid_search is True:
         pipeline_steps.append(
             (
                 "classifier",
@@ -65,7 +63,7 @@ def create_pipeline_RandomForest(
         )
     if use_feature_selection == 2:
         pipeline_steps.append(("feature_selection", VarianceThreshold(threshold=0.20)))
-    if grid_search == False:
+    if grid_search is False:
         pipeline_steps.append(
             (
                 "classifier",
@@ -74,7 +72,7 @@ def create_pipeline_RandomForest(
                 ),
             )
         )
-    if grid_search == True:
+    if grid_search is True:
         pipeline_steps.append(
             (
                 "classifier",

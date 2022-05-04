@@ -65,7 +65,7 @@ def train(
                 random_state,
             )
             mlflow.log_param("ml_model", "LogisticRegression")
-            if grid_search == False:
+            if grid_search is False:
                 mlflow.log_param("max_iter", max_iter)
                 mlflow.log_param("logreg_c", logreg_c)
         if ml_model == 2:
@@ -77,10 +77,10 @@ def train(
                 random_state,
             )
             mlflow.log_param("ml_model", "RandomForestClassifier")
-            if grid_search == False:
+            if grid_search is False:
                 mlflow.log_param("n_estimators", n_estimators)
 
-        if grid_search == True and ml_model == 1:
+        if grid_search is True and ml_model == 1:
             cv_inner = KFold(n_splits=3, shuffle=True, random_state=1)
             param_grid = {
                 "penalty": ["l1", "l2"],
@@ -92,7 +92,7 @@ def train(
                 pipeline, param_grid=param_grid, n_jobs=1, cv=cv_inner, refit=True
             )
 
-        if grid_search == True and ml_model == 2:
+        if grid_search is True and ml_model == 2:
             cv_inner = KFold(n_splits=3, shuffle=True, random_state=1)
             param_grid = {
                 "classifier__n_estimators": [10, 100, 150, 200],
