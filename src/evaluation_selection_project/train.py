@@ -1,12 +1,12 @@
 from pathlib import Path
-from joblib import dump  # type: ignore
+from joblib import dump  # type: ignore[unused-ignore]
 
 import click
-import mlflow  # type: ignore
-import mlflow.sklearn  # type: ignore
-from sklearn.model_selection import KFold  # type: ignore
-from sklearn.model_selection import GridSearchCV  # type: ignore
-from sklearn.model_selection import cross_val_score  # type: ignore
+import mlflow  # type: ignore[unused-ignore]
+import mlflow.sklearn  # type: ignore[unused-ignore]
+from sklearn.model_selection import KFold  # type: ignore[unused-ignore]
+from sklearn.model_selection import GridSearchCV  # type: ignore[unused-ignore]
+from sklearn.model_selection import cross_val_score  # type: ignore[unused-ignore]
 
 from .data import get_dataset
 from .pipeline import create_pipeline_LogisticRegression
@@ -88,8 +88,19 @@ def train(
                 "solver": ["newton-cg", "lbfgs", "liblinear"],
                 "max_iter": [100, 1000, 1500, 2000],
             }
+            scoring = [
+                "accuracy",
+                "f1_weighted",
+                "precision_weighted",
+                "recall_weighted",
+            ]
             search = GridSearchCV(
-                pipeline, param_grid=param_grid, n_jobs=1, cv=cv_inner, refit=True
+                pipeline,
+                param_grid=param_grid,
+                n_jobs=1,
+                cv=cv_inner,
+                scoring=scoring,
+                refit="f1_weighted",
             )
 
         if grid_search is True and ml_model == 2:
@@ -100,8 +111,19 @@ def train(
                 "classifier__max_depth": [2, 4, 5, 6, None],
                 "classifier__criterion": ["gini", "entropy"],
             }
+            scoring = [
+                "accuracy",
+                "f1_weighted",
+                "precision_weighted",
+                "recall_weighted",
+            ]
             search = GridSearchCV(
-                pipeline, param_grid=param_grid, n_jobs=1, cv=cv_inner, refit=True
+                pipeline,
+                param_grid=param_grid,
+                n_jobs=1,
+                cv=cv_inner,
+                scoring=scoring,
+                refit="f1_weighted",
             )
 
         cv = KFold(n_splits=test_split_ratio, shuffle=True, random_state=random_state)
