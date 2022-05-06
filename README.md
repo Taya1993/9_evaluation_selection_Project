@@ -126,6 +126,7 @@ Run MLflow UI to see the information about experiments:
 ```sh
 poetry run mlflow ui
 ```
+
 [mlflow scrin](https://disk.yandex.ru/i/O_80_G4_TAYVbg)
 
 5.9. I use nested cross-validation with GridSearchCV, but maybe my computer very weak, CPU over 100% and I cant't wait end of executing script. But you can see code of it and you have choose to use or not GridSearchCV. Default value --grid-search = False. **(10 points)**
@@ -142,6 +143,7 @@ poetry run train --ml-model 2 --use-feature-selection 2 --grid-search True
 ```sh
 poetry run pytest
 ```
+
 [terminal scrin](https://disk.yandex.ru/i/KXHC_2dNt2v8Ng)
 
 5.12. The code in this repository formatted with black and lint with flake8. **(2 points)**
