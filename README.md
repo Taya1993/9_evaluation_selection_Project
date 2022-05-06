@@ -8,6 +8,7 @@ This package allows you to train model for detecting the cover type of the fores
 1. Clone this repository to your machine.
 
 2. Download [Forest train dataset](https://www.kaggle.com/competitions/forest-cover-type-prediction/data) dataset, save csv locally (default path is *data/train.csv* in repository's root).
+
 [pic](https://disk.yandex.ru/i/OVLsGcZz82PNEw)
 
 3. Make sure Python 3.9 and [Poetry](https://python-poetry.org/docs/) are installed on your machine.
@@ -55,9 +56,11 @@ poetry add --dev pytest
 
 5.4. I used poetry to manage my package and dependencies. **(6 points)** And split installed dependencies for development and not development. **(4 points)**
 
-5.5. Add my data to gitignore. **(5 points)** Create EDA report but it costs 0 point. Script in Profiling.py, file name DataFrameProfile.html in the root directory. 
+5.5. Add my data to gitignore. **(5 points)** 
+Create EDA report but it costs 0 point. Script in Profiling.py, file name DataFrameProfile.html in the root directory. 
 
-5.6. I wrote a script that trains a model and saves it to a file. I use click when create CLI. **(10 points)** And I registered script in pyproject.toml. **(2 points)**  Random seeds by default = 42.
+5.6. I wrote a script that trains a model and saves it to a file. I use click when create CLI. **(10 points)** 
+And I registered script in pyproject.toml. **(2 points)**  Random seeds by default = 42.
 Run train with the following command:
 ```sh
 poetry run train -d <path to csv with data> -s <path to save trained model>
@@ -82,7 +85,9 @@ poetry run mlflow ui
 [mlflow scrin](https://disk.yandex.ru/i/bfA_JwR8ovNG5w)
 
 5.8.
-If you choose number 1 then train Logistic Regression (and by default), if you choose number 2 then train RandomForestClassifier. **(4 points)** I try at least three different sets of hyperparameters for each model. **(3 points)** If you choose number 1 in --use-feature-selection then apply SelectFromModel, if you choose number 2 then apply VarianceThreshold. If you choose another number or not use feature-selection flag then you does not apply any feature-selection. **(4 points)**
+If you choose number 1 then train Logistic Regression (and by default), if you choose number 2 then train RandomForestClassifier. **(4 points)** 
+I try at least three different sets of hyperparameters for each model. **(3 points)** 
+If you choose number 1 in --use-feature-selection then apply SelectFromModel, if you choose number 2 then apply VarianceThreshold. If you choose another number or not use feature-selection flag then you does not apply any feature-selection. **(4 points)**
 My experiments:
 ```sh
 poetry run train --ml-model 1 --max-iter 1000 --logreg-c 10 --use-feature-selection 1
