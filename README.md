@@ -71,6 +71,7 @@ First I use the same Logistic Regression like in demo.
 poetry run train
 ```
 [terminal scrin](https://disk.yandex.ru/i/3FfS6YlUtlJL6A)
+
 Run MLflow UI to see the result:
 ```sh
 poetry run mlflow ui
