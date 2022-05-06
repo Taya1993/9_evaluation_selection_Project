@@ -151,33 +151,33 @@ poetry run pytest
 ```sh
 poetry run black <namefile.py>
 ```
-[terminal scrin](https://disk.yandex.ru/i/BEDZN42bQ7ngCw)
+[terminal scrin 1](https://disk.yandex.ru/i/BEDZN42bQ7ngCw)
 
-[terminal scrin](https://disk.yandex.ru/i/Yiz_g1z9vAGxmQ)
+[terminal scrin 2](https://disk.yandex.ru/i/Yiz_g1z9vAGxmQ)
 
-[terminal scrin](https://disk.yandex.ru/i/sAyNSz8V2lMXiQ)
+[terminal scrin 3](https://disk.yandex.ru/i/sAyNSz8V2lMXiQ)
 
 flake8 interfere black. Black create E501 line too long when I check flake8.
 
-[terminal scrin](https://disk.yandex.ru/i/uj0V3mtt5jDt7w)
+[terminal scrin 1](https://disk.yandex.ru/i/uj0V3mtt5jDt7w)
 
-[terminal scrin](https://disk.yandex.ru/i/kNKIjIo2N3OZBQ)
+[terminal scrin 2](https://disk.yandex.ru/i/kNKIjIo2N3OZBQ)
 
 So...
 ```sh
 poetry run flake8 --ignore=E501 <namefile.py>
 ```
-[terminal scrin](https://disk.yandex.ru/i/EM7SUT6KtPZk5w)
+[terminal scrin 1](https://disk.yandex.ru/i/EM7SUT6KtPZk5w)
 
-[terminal scrin](https://disk.yandex.ru/i/vr_RlY96OuxV-w)
+[terminal scrin 2](https://disk.yandex.ru/i/vr_RlY96OuxV-w)
 
 5.13. I pass mypy typechecking. **(3 points)**
 ```sh
 poetry run mypy <namefile.py>
 ```
-[terminal scrin](https://disk.yandex.ru/i/M1HFug595WNfYQ)
+[terminal scrin 1](https://disk.yandex.ru/i/M1HFug595WNfYQ)
 
-[terminal scrin](https://disk.yandex.ru/i/M0myvGh4d5ZHDQ)
+[terminal scrin 2](https://disk.yandex.ru/i/M0myvGh4d5ZHDQ)
 
 5.14. I combine steps of testing and linting into a single command using nox session. **(2 points)**
 I not use install_with_constraints because of "Permission denied: 'C:\\Users\\T3BB0~1.TIT\\AppData\\Local\\Temp\\tmp1kty95iy'"
@@ -189,6 +189,6 @@ But if I use only poetry run mypy then all successful.
 ```sh
 poetry run nox
 ```
-[terminal scrin](https://disk.yandex.ru/i/KruqP87YL8GpcA)
+[terminal scrin 1](https://disk.yandex.ru/i/KruqP87YL8GpcA)
 
-[terminal scrin](https://disk.yandex.ru/i/YemI2UaOdtDZJA)
+[terminal scrin 2](https://disk.yandex.ru/i/YemI2UaOdtDZJA)
